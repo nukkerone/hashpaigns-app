@@ -1,0 +1,7 @@
+{
+  "name": "hashpaigns-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
