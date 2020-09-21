@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create Campaign</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label>Title</ion-label>
+    <ion-input placeholder="#CampaignA" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Description</ion-label>
+    <ion-textarea placeholder="Proceed with #CampaignA from 10AM to 11AM"></ion-textarea>
+  </ion-item>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button color="primary" (click)="create()">Create</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

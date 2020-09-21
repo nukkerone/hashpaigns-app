@@ -8,6 +8,7 @@ import { CampaignsPage } from './campaigns.page';
 import { CampaignPage } from './campaign/campaign.page';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { CampaignCreateComponent } from './campaign-create/campaign-create.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ import { SharedModule } from '../shared/shared.module';
     RouterModule,
     SharedModule,
   ],
-  declarations: [CampaignsPage, CampaignPage],
-  exports: [CampaignPage, CampaignPage]
+  declarations: [CampaignsPage, CampaignPage, CampaignCreateComponent],
+  exports: [CampaignPage, CampaignPage, CampaignCreateComponent]
 })
 export class CampaignsPageModule {}

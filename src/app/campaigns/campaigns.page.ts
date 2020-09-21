@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { CampaignCreateComponent } from './campaign-create/campaign-create.component';
 
 @Component({
   selector: 'app-campaigns',
@@ -14,9 +16,16 @@ export class CampaignsPage implements OnInit {
     { id: 4, title: 'Campaign D', description: 'Use hashtag #CampaignD from 10AM - 11AM' },
   ];
 
-  constructor() { }
+  constructor(public modalController: ModalController) { }
 
   ngOnInit() {
+  }
+
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: CampaignCreateComponent,
+    });
+    return await modal.present();
   }
 
 }
