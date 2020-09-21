@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Campaigns</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-button>
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col size="12" size-md="4" *ngFor="let campaign of campaigns">
+      <app-campaign-card 
+        [title]="campaign.title" 
+        [description]="campaign.description"
+        [routerLink]="['/dashboard/campaigns', campaign.id]"
+      >
+      </app-campaign-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

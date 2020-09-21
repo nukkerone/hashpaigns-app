@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { GroupsPage } from './groups.page';
+import { CampaignsPage } from './campaigns.page';
+import { CampaignPage } from './campaign/campaign.page';
 import { RouterModule } from '@angular/router';
-import { GroupPage } from './group/group.page';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -17,6 +17,7 @@ import { SharedModule } from '../shared/shared.module';
     RouterModule,
     SharedModule,
   ],
-  declarations: [GroupsPage, GroupPage]
+  declarations: [CampaignsPage, CampaignPage],
+  exports: [CampaignPage, CampaignPage]
 })
-export class GroupsPageModule {}
+export class CampaignsPageModule {}

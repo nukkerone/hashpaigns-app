@@ -8,6 +8,7 @@ import { DashboardPageRoutingModule } from './dashboard-routing.module';
 
 import { DashboardPage } from './dashboard.page';
 import { GroupsPageModule } from '../groups/groups.module';
+import { CampaignsPageModule } from '../campaigns/campaigns.module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { GroupsPageModule } from '../groups/groups.module';
     IonicModule,
     DashboardPageRoutingModule,
     GroupsPageModule,
+    CampaignsPageModule,
   ],
   declarations: [DashboardPage]
 })

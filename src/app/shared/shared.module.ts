@@ -3,11 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
-import { GroupsPage } from './groups.page';
 import { RouterModule } from '@angular/router';
-import { GroupPage } from './group/group.page';
-import { SharedModule } from '../shared/shared.module';
+import { CampaignCardComponent } from './campaign-card/campaign-card.component';
 
 @NgModule({
   imports: [
@@ -15,8 +12,8 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule,
     IonicModule,
     RouterModule,
-    SharedModule,
   ],
-  declarations: [GroupsPage, GroupPage]
+  declarations: [CampaignCardComponent],
+  exports: [CampaignCardComponent]
 })
-export class GroupsPageModule {}
+export class SharedModule {}

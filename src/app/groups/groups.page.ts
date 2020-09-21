@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GroupsPage implements OnInit {
 
+  protected groups = [];
+
   constructor() { }
 
   ngOnInit() {
