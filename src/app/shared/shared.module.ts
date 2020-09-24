@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { CampaignCardComponent } from './campaign-card/campaign-card.component';
+import { AngularFireModule } from '@angular/fire';
+import { AuthService } from './auth.service';
 
 @NgModule({
   imports: [
@@ -12,8 +14,10 @@ import { CampaignCardComponent } from './campaign-card/campaign-card.component';
     FormsModule,
     IonicModule,
     RouterModule,
+    AngularFireModule
   ],
   declarations: [CampaignCardComponent],
-  exports: [CampaignCardComponent]
+  exports: [CampaignCardComponent],
+  providers: [AuthService]
 })
 export class SharedModule {}

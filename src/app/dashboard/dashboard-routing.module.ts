@@ -14,6 +14,11 @@ const routes: Routes = [
     component: DashboardPage,
     children: [
       {
+        path: '',
+        redirectTo: 'campaigns',
+        pathMatch: 'full'
+      },
+      {
         path: 'groups',
         component: GroupsPage,
       },

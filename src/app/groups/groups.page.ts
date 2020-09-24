@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { AuthService } from '../shared/auth.service';
 import { GroupCreateComponent } from './group-create/group-create.component';
 
 @Component({
@@ -11,9 +12,10 @@ export class GroupsPage implements OnInit {
 
   protected groups = [];
 
-  constructor(public modalController: ModalController) { }
+  constructor(public modalController: ModalController, public auth: AuthService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    
   }
 
   async presentModal() {

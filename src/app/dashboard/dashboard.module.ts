@@ -22,6 +22,6 @@ import { StoreModule } from '@ngrx/store';
     StoreModule,
     ReactiveFormsModule,
   ],
-  declarations: [DashboardPage]
+  declarations: [DashboardPage],
 })
 export class DashboardPageModule {}

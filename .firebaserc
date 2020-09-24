@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "hashpaigns": {
+      "hosting": {
+        "app": [
+          "hashpaigns"
+        ]
+      }
+    }
+  }
+}

@@ -11,6 +11,7 @@ import { SharedModule } from '../shared/shared.module';
 import { GroupCreateComponent } from './group-create/group-create.component';
 import { GroupUsersPage } from './group-users/group-users.page';
 import { AddUserComponent } from './add-user/add-user.component';
+import { AuthService } from '../shared/auth.service';
 
 @NgModule({
   imports: [
