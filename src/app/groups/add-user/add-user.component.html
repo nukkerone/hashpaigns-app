@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Users</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item class="ion-margin-bottom">
+    <ion-label>Email</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+
+  <ion-item class="ion-margin-bottom">
+    <ion-label>Role</ion-label>
+    <ion-select placeholder="Select One">
+      <ion-select-option value="member">Member</ion-select-option>
+      <ion-select-option value="admin">Administrator</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button (click)="presentToast()">Add</ion-button>
+  
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button color="primary" (click)="done()">Done</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

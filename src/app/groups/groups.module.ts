@@ -9,6 +9,8 @@ import { RouterModule } from '@angular/router';
 import { GroupPage } from './group/group.page';
 import { SharedModule } from '../shared/shared.module';
 import { GroupCreateComponent } from './group-create/group-create.component';
+import { GroupUsersPage } from './group-users/group-users.page';
+import { AddUserComponent } from './add-user/add-user.component';
 
 @NgModule({
   imports: [
@@ -18,7 +20,7 @@ import { GroupCreateComponent } from './group-create/group-create.component';
     RouterModule,
     SharedModule,
   ],
-  declarations: [GroupsPage, GroupPage, GroupCreateComponent],
-  exports: [GroupsPage, GroupPage, GroupCreateComponent],
+  declarations: [GroupsPage, GroupPage, GroupCreateComponent, GroupUsersPage, AddUserComponent],
+  exports: [GroupsPage, GroupPage, GroupCreateComponent, GroupUsersPage, AddUserComponent],
 })
 export class GroupsPageModule {}

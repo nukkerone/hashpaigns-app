@@ -28,3 +28,10 @@
 a {
   text-decoration: none;
 }
+
+ion-card-title {
+  ion-button {
+    margin-top: -6px;
+    margin-right: -6px;
+  }
+}

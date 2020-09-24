@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Group Name</ion-title>
-    
+
     <ion-buttons slot="start">
       <ion-menu-toggle>
         <ion-button>
@@ -13,29 +13,48 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-card>
+  <ion-card class="ion-no-margin ion-margin-bottom">
     <ion-card-header>
       <ion-card-title>Group Description</ion-card-title>
     </ion-card-header>
 
-    <ion-card-content> 
+    <ion-card-content>
       Keep close to Nature's heart... and break clear away, once in awhile,
       and climb a mountain or spend a week in the woods. Wash your spirit clean.
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Campaigns</ion-card-title>
-    </ion-card-header>
+  <a routerDirection="forward" [routerLink]="['users']">
+    <ion-card class="ion-no-margin ion-margin-bottom">
+      <ion-card-header>
+        <ion-card-title>Group Members
+          <!-- <ion-button fill="clear" color="dark" class="ion-float-right">
+          <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+        </ion-button> -->
+        </ion-card-title>
+      </ion-card-header>
 
-    <ion-card-content> 
-      Keep close to Nature's heart... and break clear away, once in awhile,
-      and climb a mountain or spend a week in the woods. Wash your spirit clean.
-    </ion-card-content>
-  </ion-card>
+      <ion-card-content>
+        Manage members for this group.
 
-  <ion-row>
+      </ion-card-content>
+    </ion-card>
+  </a>
+
+  <a routerDirection="forward" [routerLink]="['/dashboard/campaigns']">
+    <ion-card class="ion-no-margin">
+      <ion-card-header>
+        <ion-card-title>Campaigns</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        View campaigns for this group.
+      </ion-card-content>
+    </ion-card>
+  </a>
+
+
+  <!-- <ion-row>
     <ion-col size="12" size-md="4" *ngFor="let campaign of campaigns">
       <app-campaign-card 
         [title]="campaign.title" 
@@ -45,5 +64,6 @@
       </app-campaign-card>
     </ion-col>
 
-  </ion-row>
+  </ion-row> -->
+
 </ion-content>
