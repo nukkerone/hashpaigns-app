@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { AddUserComponent } from '../add-user/add-user.component';
+import { remove } from '../../state/users.actions';
 
 @Component({
   selector: 'app-group-users',
@@ -9,15 +12,25 @@ import { AddUserComponent } from '../add-user/add-user.component';
 })
 export class GroupUsersPage implements OnInit {
 
-  public users: Array<any> = [
-    {id: 1, email: 'user1@mail.com', name: 'Gabriel Medina', role: 'Administrator', bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'},
-    {id: 2, email: 'user2@mail.com', name: 'Ramon Medina', role: 'Member', bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'},
-    {id: 3, email: 'user3@mail.com', name: 'Udriel Medina', role: 'Member', bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'},
-  ];
+  /* public users: Array<any> = [
+    { id: 1, email: 'user1@mail.com', name: 'Gabriel Medina', role: 'Administrator', bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+    { id: 2, email: 'user2@mail.com', name: 'Ramon Medina', role: 'Member', bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+    { id: 3, email: 'user3@mail.com', name: 'Udriel Medina', role: 'Member', bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing.' },
+  ]; */
 
   public query = '';
 
-  constructor(public modalController: ModalController, public toastController: ToastController) { }
+  public users$: Observable<Array<any>>;
+  public users: Array<any> = [];
+
+  constructor(
+    public modalController: ModalController,
+    public toastController: ToastController,
+    public store: Store<{ users: Array<any> }>
+  ) {
+    this.users$ = store.pipe(select('users'));
+    this.users$.subscribe(users => this.users = users);
+  }
 
   ngOnInit() {
   }
@@ -46,12 +59,13 @@ export class GroupUsersPage implements OnInit {
 
   remove(id) {
     this.users = this.users.filter(u => u.id !== id);
-    this.presentToast();
+    this.store.dispatch(remove({ id }));
+    this.presentToast('The user has been removed');
   }
 
-  async presentToast() {
+  async presentToast(message) {
     const toast = await this.toastController.create({
-      message: 'The user has been added',
+      message,
       duration: 2000,
       position: 'top'
     });

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -19,6 +19,7 @@ import { AddUserComponent } from './add-user/add-user.component';
     IonicModule,
     RouterModule,
     SharedModule,
+    ReactiveFormsModule,
   ],
   declarations: [GroupsPage, GroupPage, GroupCreateComponent, GroupUsersPage, AddUserComponent],
   exports: [GroupsPage, GroupPage, GroupCreateComponent, GroupUsersPage, AddUserComponent],
