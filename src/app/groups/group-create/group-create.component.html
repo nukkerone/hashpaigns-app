@@ -11,21 +11,24 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-item>
-    <ion-label>Name</ion-label>
-    <ion-input placeholder="The groupe name" type="text"></ion-input>
-  </ion-item>
+  <form [formGroup]="groupForm" (ngSubmit)="create()">
+    <ion-item>
+      <ion-label>Name</ion-label>
+      <ion-input placeholder="The groupe name" type="text" formControlName="name"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>Description</ion-label>
-    <ion-textarea placeholder="The group public description"></ion-textarea>
-  </ion-item>
+    <ion-item>
+      <ion-label>Description</ion-label>
+      <ion-textarea placeholder="The group public description" formControlName="description"></ion-textarea>
+    </ion-item>
+  </form>
+
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-button color="primary" (click)="create()">Create</ion-button>
+      <ion-button color="primary" (click)="create(true)">Create</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

@@ -13,6 +13,7 @@ import { usersReducer } from './state/users.reducers';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +24,8 @@ import { environment } from 'src/environments/environment';
     AppRoutingModule,
     StoreModule.forRoot({users: usersReducer}, {}),
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireFunctionsModule,
   ],
   providers: [
     StatusBar,

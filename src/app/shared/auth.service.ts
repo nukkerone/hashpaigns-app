@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { auth } from 'firebase/app';
 
@@ -10,13 +11,19 @@ export class AuthService {
   userData: any;
   additionalUserInfo: any;
 
-  constructor(public afAuth: AngularFireAuth, public router: Router) {
+  constructor(
+    public zone: NgZone,
+    public afAuth: AngularFireAuth,
+    public afs: AngularFirestore,
+    public router: Router) {
     const localUser = JSON.parse(localStorage.getItem('user'));
     const localAdditionalUserInfo = JSON.parse(localStorage.getItem('additionalUserInfo'));
     this.userData = localUser ? localUser : null;
     this.additionalUserInfo = localAdditionalUserInfo ? localAdditionalUserInfo : null;
     console.log('User data ', this.userData);
     console.log('additionalUserInfo data ', this.additionalUserInfo);
+
+    this.afs.collection('users').valueChanges().subscribe(v => console.log('Changes ', v));
 
     this.afAuth.authState.subscribe(user => {
       if (user) {
@@ -37,10 +44,17 @@ export class AuthService {
     const provider = new auth.TwitterAuthProvider();
     return this.afAuth.signInWithPopup(provider)
       .then((result) => {
-        this.additionalUserInfo = JSON.stringify(result.additionalUserInfo.profile);
-        localStorage.setItem('additionalUserInfo', this.additionalUserInfo);
-        console.log('You have been successfully logged in!', result);
-        this.router.navigate(['dashboard']);
+        this.zone.run(() => {
+          this.additionalUserInfo = result.additionalUserInfo.profile;
+          localStorage.setItem('additionalUserInfo', JSON.stringify(this.additionalUserInfo));
+          console.log('You have been successfully logged in!', this.additionalUserInfo);
+          const userDoc = this.afs.doc<any>('users/' + result.user.uid);
+          userDoc.set({
+            username: result.additionalUserInfo.username,
+            displayName: result.user.displayName,
+          });
+          this.router.navigate(['dashboard']);
+        });
       }).catch((error) => {
         console.log(error);
       });
