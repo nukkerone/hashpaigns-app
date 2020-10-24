@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-group',
@@ -14,9 +15,18 @@ export class GroupPage implements OnInit {
     { id: 4, title: 'Campaign D', description: 'Use hashtag #CampaignD from 10AM - 11AM' },
   ];
 
-  constructor() { }
+  constructor(
+    public modalController: ModalController,
+  ) { }
 
   ngOnInit() {
+  }
+
+  async presentModal() {
+    /* const modal = await this.modalController.create({
+      component: GroupCreateComponent,
+    });
+    return await modal.present(); */
   }
 
 }

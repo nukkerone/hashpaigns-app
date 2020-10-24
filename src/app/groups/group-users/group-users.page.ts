@@ -28,6 +28,7 @@ export class GroupUsersPage implements OnInit {
     public toastController: ToastController,
     public store: Store<{ users: Array<any> }>
   ) {
+    // NGRX selector
     this.users$ = store.pipe(select('users'));
     this.users$.subscribe(users => this.users = users);
   }

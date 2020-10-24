@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
 import { AuthService } from '../shared/auth.service';
 import { GroupsService } from '../shared/groups.service';
 import { GroupCreateComponent } from './group-create/group-create.component';
@@ -12,18 +13,20 @@ import { GroupCreateComponent } from './group-create/group-create.component';
 })
 export class GroupsPage implements OnInit {
 
-  protected groups: Observable<any>;
+  protected groups$: Observable<any>;
 
   constructor(
     public modalController: ModalController,
+    public store: Store<{ groups: Array<any> }>,
     public auth: AuthService,
     public groupsService: GroupsService,
   ) {
-    this.groups = groupsService.getAll();
+    this.groups$ = store.select('groups');
   }
 
   async ngOnInit() {
-
+    console.log('Dispatch [Groups Page] Load Groups');
+    this.store.dispatch({ type: '[Groups Page] Load Groups' });
   }
 
   async presentModal() {
