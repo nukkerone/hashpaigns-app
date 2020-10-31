@@ -29,12 +29,12 @@
     <ion-item-sliding *ngFor="let user of filteredUsers()">
       <ion-item>
         <ion-avatar slot="start">
-          <img src="https://api.adorable.io/avatars/285/{{ user.email }}.png">
+          <img src="{{ user.profileImageUrl }}">
         </ion-avatar>
         <ion-label>
-          <h2>{{ user.name}}</h2>
-          <h3>{{ user.role }}</h3>
-          <p>{{ user.bio }}</p>
+          <h2>{{ user.displayName}}</h2>
+          <h3>@{{ user.username }}</h3>
+          <p>{{ user.description }}</p>
         </ion-label>
       </ion-item>
 

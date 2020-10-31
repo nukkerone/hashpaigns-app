@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, switchAll, switchMap } from 'rxjs/operators';
+import { Observable, combineLatest } from 'rxjs';
+import { map, switchAll, mergeMap, switchMap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -16,6 +16,10 @@ export class GroupsService {
 
   private userGroupsIds: Array<any> = [];
   public userGroups: Observable<any>;
+
+  // Users in the group
+  public groupUsersCache: any = {};
+  public groupUsers: Observable<any>;
 
   constructor(
     public afs: AngularFirestore,
@@ -32,6 +36,7 @@ export class GroupsService {
       .pipe(
         map(g => g.map(v => Object.keys(v)[0])), // Map collection of ids (object) into array of ids
         switchMap(v => {  // Map into a new observable
+          console.log('V ', v);
           this.userGroupsIds = v.length ? v : ['*'];
           return this.afs.collection('groups', ref => ref.where('id', 'in', this.userGroupsIds)).valueChanges();
         })
@@ -59,5 +64,23 @@ export class GroupsService {
 
   update() {
 
+  }
+
+  getUsers(groupId): Observable<any> {
+    let groupUsers$ = null;
+    if (!this.groupUsersCache[groupId]) {
+      groupUsers$ = this.afs.collection('group_users/' + groupId + '/users').valueChanges();
+      groupUsers$ = groupUsers$.pipe(
+        map((g: any) => g.map(v => Object.keys(v)[0])), // Map collection of ids (object) into array of ids
+        switchMap((v: Array<any>) => {  // Map into a new observable
+          const groupUsersIds = v.length ? v : ['*'];
+          return this.afs.collection('users', ref => ref.where('id', 'in', groupUsersIds)).valueChanges();
+        })
+      );
+    } else {
+      groupUsers$ = this.groupUsersCache[groupId];
+    }
+
+    return groupUsers$;
   }
 }

@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { remove } from '../../state/users.actions';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-group-users',
@@ -18,22 +20,39 @@ export class GroupUsersPage implements OnInit {
     { id: 3, email: 'user3@mail.com', name: 'Udriel Medina', role: 'Member', bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing.' },
   ]; */
 
+  public groupId: string = null;
+
   public query = '';
 
   public users$: Observable<Array<any>>;
   public users: Array<any> = [];
 
+  protected groupUsers$: Observable<any>;
+  protected groupUsers: any = [];
+
   constructor(
     public modalController: ModalController,
     public toastController: ToastController,
-    public store: Store<{ users: Array<any> }>
+    public route: ActivatedRoute,
+    public store: Store<{ groupUsers: any }>
   ) {
+    this.groupId = this.route.snapshot.paramMap.get('id');
+
     // NGRX selector
-    this.users$ = store.pipe(select('users'));
-    this.users$.subscribe(users => this.users = users);
+    this.groupUsers$ = store.pipe(
+      select('groupUsers'),
+      map(state => state[this.groupId] ? state[this.groupId] : [] )
+    );
+    this.groupUsers$.subscribe(groupUsers => {
+      this.groupUsers = groupUsers;
+      console.log('New group users ', groupUsers);
+    });
+
+    this.store.dispatch({ type: '[Groups Page] Load Group Users', groupId: this.groupId });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+
   }
 
   onSearchChange(event) {
@@ -44,10 +63,11 @@ export class GroupUsersPage implements OnInit {
   filteredUsers() {
     const q = this.query.toLowerCase();
     if (!q) {
-      return this.users;
+      return this.groupUsers;
     } else {
-      return this.users
-        .filter(u => (u.name.toLowerCase().indexOf(q) >= 0 || u.email.indexOf(q) >= 0 || u.bio.indexOf(q) >= 0));
+      return this.groupUsers
+        // tslint:disable-next-line:max-line-length
+        .filter(u => (u.displayName.toLowerCase().indexOf(q) >= 0 || u.username.toLowerCase().indexOf(q) >= 0 || u.description.toLowerCase().indexOf(q) >= 0));
     }
   }
 

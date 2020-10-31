@@ -43,14 +43,17 @@ export class AuthService {
   login() {
     const provider = new auth.TwitterAuthProvider();
     return this.afAuth.signInWithPopup(provider)
-      .then((result) => {
+      .then((result: any) => {
         this.zone.run(() => {
           this.additionalUserInfo = result.additionalUserInfo.profile;
           localStorage.setItem('additionalUserInfo', JSON.stringify(this.additionalUserInfo));
           const userDoc = this.afs.doc<any>('users/' + result.user.uid);
           userDoc.set({
+            id: result.user.uid,
             username: result.additionalUserInfo.username,
             displayName: result.user.displayName,
+            profileImageUrl: result.additionalUserInfo.profile.profile_image_url,
+            description: result.additionalUserInfo.profile.description,
           });
           this.router.navigate(['dashboard']);
         });

@@ -9,7 +9,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { usersReducer } from './state/users.reducers';
-import { groupsReducer } from './state/groups.reducers';
+import { groupsReducer, groupUsersReducer } from './state/groups.reducers';
 import { GroupsEffects } from './state/groups.effects';
 
 import { AppComponent } from './app.component';
@@ -26,7 +26,7 @@ import { AngularFireFunctionsModule } from '@angular/fire/functions';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    StoreModule.forRoot({users: usersReducer, groups: groupsReducer}, {}),
+    StoreModule.forRoot({users: usersReducer, groups: groupsReducer, groupUsers: groupUsersReducer}, {}),
     EffectsModule.forRoot([GroupsEffects]),
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),

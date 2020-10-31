@@ -25,7 +25,6 @@ export class GroupsPage implements OnInit {
   }
 
   async ngOnInit() {
-    console.log('Dispatch [Groups Page] Load Groups');
     this.store.dispatch({ type: '[Groups Page] Load Groups' });
   }
 
