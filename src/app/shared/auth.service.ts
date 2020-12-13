@@ -20,8 +20,6 @@ export class AuthService {
     const localAdditionalUserInfo = JSON.parse(localStorage.getItem('additionalUserInfo'));
     this.userData = localUser ? localUser : null;
     this.additionalUserInfo = localAdditionalUserInfo ? localAdditionalUserInfo : null;
-    /* console.log('User data ', this.userData);
-    console.log('additionalUserInfo data ', this.additionalUserInfo); */
 
     /* this.afs.collection('users').valueChanges().subscribe(v => console.log('Changes ', v)); */
 
